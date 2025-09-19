@@ -1,13 +1,26 @@
 export default function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).send('Method Not Allowed');
+  if (req.method === "POST") {
+    let body = "";
+    req.on("data", chunk => body += chunk);
+    req.on("end", () => {
+      const params = new URLSearchParams(body);
+      const password = params.get("password");
 
-  const password = (req.body?.password || req.query?.password || '').toString();
-  const expected = process.env.SITE_PASSWORD || '';
-  if (!expected) return res.status(500).send('SITE_PASSWORD não configurada');
-
-  if (password !== expected) return res.status(401).send('Senha incorreta');
-
-  const maxAge = 60 * 60 * 12; // 12h
-  res.setHeader('Set-Cookie', `sess=ok; Max-Age=${maxAge}; Path=/; HttpOnly; SameSite=Lax; Secure`);
-  return res.redirect(302, '/app/');
+      // 🔑 Defina sua senha fixa aqui
+      if (password === "UFMS2025") {
+        // Define cookie de sessão válido
+        res.setHeader("Set-Cookie", "sess=ok; Path=/; HttpOnly; 
+SameSite=Lax; Max-Age=3600");
+        res.writeHead(302, { Location: "/app" });
+        res.end();
+      } else {
+        res.statusCode = 401;
+        res.end("Senha incorreta");
+      }
+    });
+  } else {
+    res.statusCode = 405;
+    res.end("Método não permitido");
+  }
 }
+
