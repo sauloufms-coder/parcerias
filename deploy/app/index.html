@@ -36,14 +36,5 @@
   <script src="flutter_bootstrap.js" async></script>
 </body>
 
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
-      var serviceWorkerUrl = 'flutter_service_worker.js?v=' + 
-Math.random().toString(36).slice(2);
-      navigator.serviceWorker.register(serviceWorkerUrl, { scope: '/app/' });
-    });
-  }
-</script>
 
 </html>
