@@ -11,7 +11,7 @@ export default function handler(req, res) {
     const params = new URLSearchParams(body || '');
     const password = params.get('password') || '';
 
-    const VALID = process.env.LOGIN_PASSWORD || 'UFMS2025';
+    const VALID = process.env.LOGIN_PASSWORD ;
     if (password === VALID) {
       // Cookie de sessão
       res.setHeader(
