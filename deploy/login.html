@@ -1,57 +1,14 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login - Sistema de Parcerias</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f0f4f8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    }
-    .login-box {
-      background: #fff;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      text-align: center;
-    }
-    input {
-      display: block;
-      width: 100%;
-      padding: 0.8rem;
-      margin: 0.8rem 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    button {
-      background: #005daa;
-      color: #fff;
-      padding: 0.8rem;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      width: 100%;
-    }
-    button:hover {
-      background: #004080;
-    }
-  </style>
-</head>
-<body>
-  <div class="login-box">
-    <h2>Acesso Restrito</h2>
-    <form method="POST" action="/api/login">
-      <input type="password" name="password" placeholder="Digite a senha" 
-required />
-      <button type="submit">Entrar</button>
-    </form>
-  </div>
-</body>
-</html>
+<form class="card" method="post" action="/api/login">
+  <h1>SisParcerias — Login</h1>
+  <label>Senha</label>
+  <input name="password" type="password" autofocus />
+  <button type="submit">Entrar</button>
+  <p class="err" id="e" hidden>Senha incorreta.</p>
+</form>
+<script>
+  const u = new URL(location.href);
+  if (u.searchParams.get('err') === '1') {
+    document.getElementById('e').hidden = false;
+  }
+</script>
 
